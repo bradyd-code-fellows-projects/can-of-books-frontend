@@ -53,7 +53,7 @@ class BestBooks extends React.Component {
     const addNewBook = await axios.post(`${process.env.REACT_APP_SERVER_LOCAL}/books`, newBook)
     this.setState({
       bookFormModalIsDisplaying: false,
-      books: [...this.state.books, addNewBook]
+      books: [...this.state.books, addNewBook.data]
     })    
     // console.log(addNewBook);
   }
