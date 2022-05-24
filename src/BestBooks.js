@@ -34,7 +34,7 @@ class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <Container style={{ display: 'flex', justifyContent: 'center'}}>
-          <Display books={this.state.books}/>
+          {this.state.books.length >= 1 ? <Display books={this.state.books}/> : <p>No books!</p>}
         </Container>
       </>
     )
