@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+
 import Display from './Components/Display'
 import {Container} from "react-bootstrap";
 
@@ -11,7 +12,12 @@ class BestBooks extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getBooks();
+  }
+
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
+
 
   componentDidMount() {
     this.getBooks()
