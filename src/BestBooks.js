@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import axios from 'axios'
+import './BestBooks.css'
 
 
 class BestBooks extends React.Component {
@@ -11,7 +12,12 @@ class BestBooks extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getBooks();
+  }
+
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
+
 
   getBooks = async () => {
     try {
@@ -24,23 +30,26 @@ class BestBooks extends React.Component {
     }
   }
 
+
+
+
   render() {
 
     /* TODO: render all the books in a Carousel */
-    let booksCarousel = this.state.books.map( (book, idx) => {
-      return(
-      <Carousel.Item key={idx}>
-        <img
-        className="books-carousel-image"
-        src="https://dummyimage.com/200x200/000/fff"
-        alt="placeholder"
-        />
-        <Carousel.Caption id="books-carousel-caption">
-          <h3>"{book.title}"</h3>
-          <h4>{book.description}</h4>
-          <h4>Status: {book.status}</h4>
-        </Carousel.Caption>
-      </Carousel.Item>)
+    let booksCarousel = this.state.books.map((book, idx) => {
+      return (
+        <Carousel.Item key={idx}>
+          <img
+            className="books-carousel-image"
+            src="https://dummyimage.com/200x200/000/fff"
+            alt="placeholder"
+          />
+          <Carousel.Caption id="books-carousel-caption">
+            <h3>"{book.title}"</h3>
+            <h4>{book.description}</h4>
+            <h4>Status: {book.status}</h4>
+          </Carousel.Caption>
+        </Carousel.Item>)
     })
 
     return (
@@ -48,7 +57,7 @@ class BestBooks extends React.Component {
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
-          <Carousel>
+          <Carousel id="booksCarousel" variant="dark">
             {booksCarousel}
           </Carousel>
         ) : (
