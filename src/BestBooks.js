@@ -50,12 +50,28 @@ class BestBooks extends React.Component {
       status: e.target.readStatus.value
     }
     console.log(newBook);
-    const addNewBook = await axios.post(`${process.env.REACT_APP_SERVER_LOCAL}/books`, newBook)
-    this.setState({
-      bookFormModalIsDisplaying: false,
-      books: [...this.state.books, addNewBook.data]
-    })    
-    // console.log(addNewBook);
+    try {
+      const addNewBook = await axios.post(`${process.env.REACT_APP_SERVER}/books`, newBook)
+      this.setState({
+        bookFormModalIsDisplaying: false,
+        books: [...this.state.books, addNewBook.data]
+      });
+    } catch (error) {
+      console.log('An error occurred: ', error.response.data)
+    }
+  }
+
+  deleteBookHandler = async (id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_SERVER}/books/${id}`);
+      let updatedBooks = this.state.books.filter( book => book._id !== id)
+      this.setState({
+        books: updatedBooks,
+      })
+      console.log('book deleted');
+    } catch (error) {
+      console.log('An error occurred: ', error.response.data)
+    }
   }
 
   render() {
@@ -64,7 +80,7 @@ class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <Container style={{ display: 'flex', justifyContent: 'center' }}>
-          {this.state.books.length >= 1 ? <Display books={this.state.books} /> : <p>No books!</p>}
+          {this.state.books.length >= 1 ? <Display deleteBookHandler={this.deleteBookHandler} books={this.state.books} /> : <p>No books!</p>}
           <Button variant="primary" onClick={this.openBookFormModalHandler}>Add a New Book</Button>
         </Container>
         <BookFormModal

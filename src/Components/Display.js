@@ -1,10 +1,11 @@
 import React from 'react'
-import {Carousel} from "react-bootstrap";
+import DeleteButton from '../Components/DeleteButton';
+import { Carousel } from "react-bootstrap";
 
 class Display extends React.Component {
     render() {
         return (
-            <Carousel style={{ width: 500}}>
+            <Carousel style={{ width: 500 }}>
                 {this.props.books.map((book, idx) => {
                     return (
                         <Carousel.Item key={idx}>
@@ -17,6 +18,11 @@ class Display extends React.Component {
                                 <h3>{book.title}</h3>
                                 <p>{book.description}</p>
                                 <p>{book.status}</p>
+                                <p>{book._id}</p>
+                                <DeleteButton
+                                deleteBookHandler={this.props.deleteBookHandler}
+                                book_id={book._id}
+                                />
                             </Carousel.Caption>
                         </Carousel.Item>
                     )
