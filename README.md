@@ -83,3 +83,15 @@ Start time: 4:15
 Finish time: 5:45
 
 Actual time needed to complete: 1.5 hours
+
+#### 25 May 2022
+
+* #### Name of feature: Update
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 2:30
+
+Finish time: 5:45
+
+Actual time needed to complete: 3.15 hours
