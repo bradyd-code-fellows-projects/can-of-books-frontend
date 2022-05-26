@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import BestBooks from './BestBooks';
+import BestBooks from '../src/Components/BestBooks';
 import Profile from './pages/About'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
