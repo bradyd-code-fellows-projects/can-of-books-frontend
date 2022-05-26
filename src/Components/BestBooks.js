@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios'
-import BookFormModal from './Components/BookFormModal.js'
+import BookFormModal from './BookFormModal.js'
+import '../Components/BestBooks.css'
 
-import Display from './Components/Display'
+import Display from './Display'
 import { Container, Button } from "react-bootstrap";
 
 class BestBooks extends React.Component {
@@ -64,7 +65,7 @@ class BestBooks extends React.Component {
   deleteBookHandler = async (id) => {
     try {
       await axios.delete(`${process.env.REACT_APP_SERVER}/books/${id}`);
-      let updatedBooks = this.state.books.filter( book => book._id !== id)
+      let updatedBooks = this.state.books.filter(book => book._id !== id)
       this.setState({
         books: updatedBooks,
       })
@@ -74,16 +75,47 @@ class BestBooks extends React.Component {
     }
   }
 
+
+  editBookHandler = async (book) => {
+    console.log(book);
+    try {
+      const editedBook = await axios.put(`${process.env.REACT_APP_SERVER}/books/${book._id}`, book);
+      let newBooksArray = this.state.books.map(existingBook => {
+        return existingBook._id === book._id
+          ? editedBook.data
+          : existingBook
+      });
+      this.setState({
+        books: newBooksArray
+      });
+    } catch (error) {
+      console.log('An error has occurred: ', error.response.data)
+    }
+  }
+
   render() {
 
     return (
       <>
+
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        <Container style={{ display: 'flex', justifyContent: 'center' }}>
-          {this.state.books.length >= 1 ? <Display deleteBookHandler={this.deleteBookHandler} books={this.state.books} /> : <p>No books!</p>}
-          <Button variant="primary" onClick={this.openBookFormModalHandler}>Add a New Book</Button>
+        <Container id="carousel-container"
+        >
+
+          {this.state.books.length >= 1 ?
+            <Display id="display-comp"
+              deleteBookHandler={this.deleteBookHandler}
+              books={this.state.books}
+              editBookHandler={this.editBookHandler}
+            />
+            : <p>No books!</p>}
+
+          <Button id="modal-button" variant="primary" onClick={this.openBookFormModalHandler}>Add a New Book</Button>
+
         </Container>
+
         <BookFormModal
+        id="book-form-modal"
           bookFormModalIsDisplaying={this.state.bookFormModalIsDisplaying}
           submitBookFormHandler={this.submitBookFormHandler}
           closeBookFormModalHandler={this.closeBookFormModalHandler}

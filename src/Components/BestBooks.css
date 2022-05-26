@@ -1,0 +1,13 @@
+#carousel-container {
+  display: flex;
+  align-items:flex-start;
+  justify-content: space-around;
+}
+
+#modal-button {
+  margin: 100px;
+}
+
+#book-form-modal {
+  margin: 20px;
+}
