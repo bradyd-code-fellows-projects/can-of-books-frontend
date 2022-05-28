@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import BookFormModal from './BookFormModal.js'
 import '../Components/BestBooks.css'
+import { withAuth0} from "@auth0/auth0-react";
 
 import Display from './Display'
 import { Container, Button } from "react-bootstrap";
@@ -21,6 +22,9 @@ class BestBooks extends React.Component {
   }
 
   getBooks = async () => {
+    const res = await this.props.auth0.getIdTokenClaims()
+    const jst = res.__raw
+    console.log(jst)
     try {
       let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
       this.setState({
@@ -125,4 +129,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
