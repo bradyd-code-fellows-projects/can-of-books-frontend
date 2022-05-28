@@ -95,3 +95,14 @@ Start time: 2:30
 Finish time: 5:45
 
 Actual time needed to complete: 3.15 hours
+
+## 27 May 2022
+* #### Name of feature: Auth0
+
+Estimate of time needed to complete: 15minutes
+
+Start time: 4:04
+
+Finish time: 4:23
+
+Actual time needed to complete: 19minutes
